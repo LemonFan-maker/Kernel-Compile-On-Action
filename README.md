@@ -1,6 +1,5 @@
  # Kernel-Compile-On-Action
  [![Compile-Linux-Kernel](https://github.com/LemonFan-maker/Kernel-Compile-On-Action/actions/workflows/main.yml/badge.svg?event=workflow_dispatch)](https://github.com/LemonFan-maker/Kernel-Compile-On-Action/actions/workflows/main.yml)
- ## 由于不可抗拒因素，该仓库已经[迁移]()
  
  目的/功效/作用: 帮助你用**Github-Action**的服务器编译Kernel[^1].
  
