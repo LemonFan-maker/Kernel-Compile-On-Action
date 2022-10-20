@@ -45,6 +45,4 @@ dpkg -i *.deb
 [^1]: 不推荐编译5.0.0以下内核.当然，理论上应该也可以.
 [^2]: 预先在本机编译config文件，上传到仓库.
 
-### 视频教程
-<iframe src="//player.bilibili.com/player.html?aid=59317437&bvid=BV1Pt411G7qh&cid=103365806&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
