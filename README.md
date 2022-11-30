@@ -14,7 +14,7 @@
 sudo su
 # password
 apt update && apt upgrade && apt install wget curl git fakeroot build-essential ncurses-dev xz-utils libssl-dev bc flex libelf-dev bison gcc make g++
-wget https://mirrors.tuna.tsinghua.edu.cn/kernel/vx.x/linux-x.xx.x.tar.xz
+wget https://mirrors.bfsu.edu.cn/kernel/vx.x/linux-x.xx.x.tar.xz
 # wget https://mirrors.edge.kernel.org/pub/linux/kernel/vx.x/linux-x.xx.x.tar.xz
 tar -xvf linux-x.xx.x.tar.xz # 'x.xx.x'为版本号
 cd linux-x.xx.x
