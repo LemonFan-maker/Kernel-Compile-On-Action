@@ -1,7 +1,5 @@
 name: Compile-Linux-Kernel
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "master" branch
   workflow_dispatch:
     inputs:
       localversion:
@@ -39,20 +37,17 @@ on:
         type: choice
           - 5.16.63
           - 5.16.62
-  # Allows you to run this workflow manually from the Actions tab
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-22.04
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+
       - uses: actions/checkout@v3
       - name: Install-Dependences
         run: |
           sudo apt-get update && sudo apt-get upgrade && sudo apt-get install wget curl git fakeroot build-essential ncurses-dev xz-utils libssl-dev bc flex libelf-dev bison gcc make cmake g++ xz-utils zstd dwarves && sudo apt-get update && sudo apt-get upgrade
+
       - name: Download-And-Unpacked
         run: |
           sudo mkdir ./kernelfiles && cd ./kernelfiles
@@ -62,6 +57,7 @@ jobs:
           cd ..
           cd ..
           sudo cp config kernelfiles/linux-${{ inputs.version }}
+
       - name: Complie-The-Kernel
         run: |
           cd kernelfiles/linux-${{ inputs.version }}
@@ -77,6 +73,7 @@ jobs:
           sudo cp *.changes ./linux-${{ inputs.version }}/buildpackages
           cd linux-${{ inputs.version }}/buildpackages
           ls -a -l
+
       - name: Create Release and Upload Release Asset
         uses: softprops/action-gh-release@v1
         with:
