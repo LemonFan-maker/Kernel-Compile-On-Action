@@ -1,9 +1,10 @@
  # Kernel-Compile-On-Action
  [![Compile-Linux-Kernel](https://github.com/LemonFan-maker/Kernel-Compile-On-Action/actions/workflows/main.yml/badge.svg?event=workflow_dispatch)](https://github.com/LemonFan-maker/Kernel-Compile-On-Action/actions/workflows/main.yml)
  
- 目的/功效/作用: 帮助你用**Github-Action**的服务器编译Kernel[^1].
+ # BUG提示区
+ ## 目前直接编译v6.x的内核(极有可能)会出现``无效的shim签名，您需要先加载内核``的错误提示
  
- **目前直接编译v6.x的内核(极有可能)会出现``无效的shim签名，您需要先加载内核``的错误提示**
+ 目的/功效/作用: 帮助你用**Github-Action**的服务器编译Kernel[^1].
  
  **重要:如果出现内核启动报错,无法正常进入系统,以及其他和内核有关的故障([见问题处理办法]()),与本人无关,请检查你的配置文件是否和自己电脑相符合**
  
