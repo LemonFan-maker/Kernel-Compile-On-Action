@@ -63,8 +63,6 @@ jobs:
           cd kernelfiles/linux-${{ inputs.version }}
           sudo mv config .config
           sudo make clean
-          sudo scripts/config --disable SYSTEM_REVOCATION_KEYS
-          sudo scripts/config --disable SYSTEM_TRUSTED_KEYS
           sudo make deb-pkg LOCALVERSION=-${{ inputs.localversion }} KDEB_PKGVERSION=$(make kernelversion)-1 -j$(nproc)
           sudo mkdir ./buildpackages
           cd ..
