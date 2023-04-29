@@ -52,7 +52,7 @@ jobs:
         run: |
           sudo mkdir ./kernelfiles && cd ./kernelfiles
           sudo wget https://mirrors.edge.kernel.org/pub/linux/kernel/${{ inputs.main }}/linux-${{ inputs.version }}.tar.xz
-          sudo tar -xvf linux-${{ inputs.version }}.tar.xz
+          sudo tar -xvf linux-${{ inputs.version }}.tar.xz &>/dev/null
           cd linux-${{ inputs.version }}
           cd ..
           cd ..
