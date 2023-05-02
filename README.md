@@ -1,6 +1,8 @@
  # Kernel-Compile-On-Action
  [![Compile-Linux-Kernel](https://github.com/LemonFan-maker/Kernel-Compile-On-Action/actions/workflows/main.yml/badge.svg?event=workflow_dispatch)](https://github.com/LemonFan-maker/Kernel-Compile-On-Action/actions/workflows/main.yml)
  
+ # 抱歉了，BUG暂无解决办法，直接Archive吧。
+ 
  # BUG提示区
  ## 目前直接编译v6.x的内核(极有可能)会出现``无效的shim签名，您需要先加载内核``的错误提示
  
