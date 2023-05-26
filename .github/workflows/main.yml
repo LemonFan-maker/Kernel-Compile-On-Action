@@ -46,7 +46,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Install-Dependences
         run: |
-          sudo apt-get update && sudo apt-get upgrade && sudo apt-get install wget curl git fakeroot build-essential ncurses-dev xz-utils libssl-dev bc flex libelf-dev bison gcc make cmake g++ xz-utils zstd dwarves aria2
+          sudo apt-get update && sudo apt-get upgrade && sudo apt-get install wget exuberant-ctags libncurses5-dev curl git fakeroot build-essential ncurses-dev xz-utils libssl-dev bc flex libelf-dev bison gcc make cmake g++ xz-utils zstd dwarves aria2
 
       - name: Download-And-Unpacked
         run: |
@@ -64,6 +64,7 @@ jobs:
           sudo make clean
           sudo scripts/config --disable SYSTEM_REVOCATION_KEYS
           sudo scripts/config --disable SYSTEM_TRUSTED_KEYS
+          sudo scripts/config --disable DEBUG_INFO
           sudo make deb-pkg LOCALVERSION=-${{ inputs.localversion }} KDEB_PKGVERSION=$(make kernelversion)-1 -j$(nproc)
           sudo mkdir ./buildpackages
           cd ..
