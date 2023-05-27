@@ -1,7 +1,7 @@
  # Kernel-Compile-On-Action
  [![Compile-Linux-Kernel](https://github.com/LemonFan-maker/Kernel-Compile-On-Action/actions/workflows/main.yml/badge.svg?event=workflow_dispatch)](https://github.com/LemonFan-maker/Kernel-Compile-On-Action/actions/workflows/main.yml)
  
- # 抱歉了，BUG暂无解决办法，直接Archive吧。
+ # ~~抱歉了，BUG暂无解决办法，直接Archive吧。~~(似乎可以编译成功)
  
  # BUG提示区
  ## 目前直接编译v6.x的内核(极有可能)会出现``无效的shim签名，您需要先加载内核``的错误提示
@@ -27,6 +27,7 @@ cd linux-x.xx.x
 # 以下俩二选一
 make menuconfig # 合理的方法
 make oldconfig # 保险的方法
+make defconfig # 用于测试
 # 选择要安装的modules，不要太多，否则编译会很慢，建议去掉一些没用的驱动.
 ```
 2.重命名`.config`为`config`
