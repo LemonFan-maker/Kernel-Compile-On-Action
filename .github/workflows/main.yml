@@ -1,48 +1,11 @@
 name: Compile-Linux-Kernel
 on:
   workflow_dispatch:
-    inputs:
-      localversion:
-        description: "自定义名称，别写中文"
-        required: true
-        default: custom
-        type: choice
-          - custon
-      main:
-        description: "kernel主版本,一定要真实存在，否则无法编译"
-        required: true
-        default: v5.x
-        type: choice
-        options:
-        - v1.0
-        - v1.1
-        - v1.2
-        - v1.3
-        - v2.0
-        - v2.1
-        - v2.2
-        - v2.3
-        - v2.4
-        - v2.5
-        - v2.6
-        - v3.0
-        - v3.x
-        - v4.x
-        - v5.x
-        - v6.x
-      version:
-        description: "kernel版本，应与主版本对应"
-        required: true
-        default: "5.15.63"
-        type: choice
-          - 5.16.63
-          - 5.16.62
 
 jobs:
   build:
     runs-on: ubuntu-22.04
     steps:
-
       - uses: actions/checkout@v3
       - name: Install-Dependences
         run: |
@@ -50,36 +13,26 @@ jobs:
 
       - name: Download-And-Unpacked
         run: |
-          sudo mkdir ./kernelfiles && cd ./kernelfiles
-          sudo aria2c -x 16 -s 32 https://mirrors.edge.kernel.org/pub/linux/kernel/${{ inputs.main }}/linux-${{ inputs.version }}.tar.xz &>/dev/null
-          sudo tar -xvf linux-${{ inputs.version }}.tar.xz &>/dev/null
-          cd linux-${{ inputs.version }}
-          cd ../..
-          sudo cp config kernelfiles/linux-${{ inputs.version }}
-
+          sudo aria2c -x 16 -s 32 https://gitlab.com/msm8998-mainline/linux/-/archive/mainline/6.1/linux-mainline-6.1.tar.gz &>/dev/null
+          sudo tar -xvf linux-mainline-6.1.tar.gz &> /dev/null
+          sudo cp config linux-mainline-6.1
+          sudo rm -rf linux-mainline-6.1.tar.gz
+          
       - name: Complie-The-Kernel
         run: |
-          cd kernelfiles/linux-${{ inputs.version }}
+          cd linux-mainline-6.1
           sudo mv config .config
           sudo make clean
-          sudo scripts/config --disable SYSTEM_REVOCATION_KEYS
-          sudo scripts/config --disable SYSTEM_TRUSTED_KEYS
-          sudo scripts/config --disable DEBUG_INFO
-          sudo make deb-pkg LOCALVERSION=-${{ inputs.localversion }} KDEB_PKGVERSION=$(make kernelversion)-1 -j$(nproc)
-          sudo mkdir ./buildpackages
+          sudo make 
           cd ..
-          sudo cp *.deb ./linux-${{ inputs.version }}/buildpackages
-          sudo cp *.buildinfo ./linux-${{ inputs.version }}/buildpackages
-          sudo cp *.changes ./linux-${{ inputs.version }}/buildpackages
-          cd linux-${{ inputs.version }}/buildpackages
-          ls -a -l
+          sudo tar -cvpzf linux-mainline-6.1.tgz linux-mainline-6.1/
 
       - name: Create Release and Upload Release Asset
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ inputs.version }}
-          name: Linux-${{ inputs.version }}-${{ inputs.localversion }}
-          body: Manually build the linux kernel.
+          tag_name: linux-mainline-6.1
+          name: linux-mainline-6.1.tgz
+          body: Manually build the android kernel.
           draft: false
           prerelease: false
           files: ./kernelfiles/linux-${{ inputs.version }}/buildpackages/*
