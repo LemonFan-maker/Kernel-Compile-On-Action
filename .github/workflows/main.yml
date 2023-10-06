@@ -23,7 +23,7 @@ jobs:
           cd linux-mainline-6.1
           sudo mv config .config
           sudo make clean
-          sudo make 
+          sudo make -j$(nproc)
           cd ..
           sudo tar -cvpzf linux-mainline-6.1.tgz linux-mainline-6.1/
 
