@@ -35,4 +35,4 @@ jobs:
           body: Manually build the android kernel.
           draft: false
           prerelease: false
-          files: ./kernelfiles/linux-${{ inputs.version }}/buildpackages/*
+          files: ./linux-mainline-6.1.tgz
