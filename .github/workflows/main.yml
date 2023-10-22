@@ -6,33 +6,40 @@ jobs:
   build:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+      - uses: uraimo/run-on-arch-action@v2
+        name: Run commands
+        id: runcmd
+        with:
+          arch: aarch64
+          distro: ubuntu22.04
       - name: Install-Dependences
         run: |
           sudo apt-get update && sudo apt-get upgrade && sudo apt-get install wget exuberant-ctags libncurses5-dev curl git fakeroot build-essential ncurses-dev xz-utils libssl-dev bc flex libelf-dev bison gcc make cmake g++ xz-utils zstd dwarves aria2
 
       - name: Download-And-Unpacked
         run: |
+          uname -a
           sudo aria2c -x 16 -s 32 https://gitlab.com/msm8998-mainline/linux/-/archive/mainline/6.1/linux-mainline-6.1.tar.gz &>/dev/null
-          sudo tar -xvf linux-mainline-6.1.tar.gz &> /dev/null
-          sudo cp config linux-mainline-6.1
-          sudo rm -rf linux-mainline-6.1.tar.gz
+          sudo unzip android_kernel_nubia_msm8998-lineage-17.1.zip &> /dev/null
+          sudo cp config android_kernel_nubia_msm8998-lineage-17.1
+          sudo rm -rf android_kernel_nubia_msm8998-lineage-17.1.zip
           
       - name: Complie-The-Kernel
         run: |
-          cd linux-mainline-6.1
+          cd android_kernel_nubia_msm8998-lineage-17.1
           sudo mv config .config
           sudo make clean
           sudo make -j$(nproc)
           cd ..
-          sudo tar -cvpzf linux-mainline-6.1.tgz linux-mainline-6.1/
+          sudo tar -cvpzf android_kernel_nubia_msm8998-lineage-17.1.tgz android_kernel_nubia_msm8998-lineage-17.1
 
       - name: Create Release and Upload Release Asset
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: linux-mainline-6.1
-          name: linux-mainline-6.1.tgz
+          tag_name: android_kernel_nubia_msm8998-lineage-17.1
+          name: android_kernel_nubia_msm8998-lineage-17.1.tgz
           body: Manually build the android kernel.
           draft: false
           prerelease: false
-          files: ./linux-mainline-6.1.tgz
+          files: ./android_kernel_nubia_msm8998-lineage-17.1.tgz
